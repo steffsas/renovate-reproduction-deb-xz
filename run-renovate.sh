@@ -1,7 +1,14 @@
 #!/bin/bash
-docker run --rm -it \
+set -e
+
+DOCKER_FLAGS="--rm"
+if [ -t 1 ]; then
+  DOCKER_FLAGS+=" -it"
+fi
+
+docker run $DOCKER_FLAGS \
     -v "$(pwd)":/usr/src/app \
-    -e LOG_LEVEL=debug \
-    -e RENOVATE_PLATFORM=local \
-    -e GITHUB_COM_TOKEN=dummy \
+    -e LOG_LEVEL="$LOG_LEVEL" \
+    -e RENOVATE_PLATFORM="$RENOVATE_PLATFORM" \
+    -e GITHUB_COM_TOKEN="$GITHUB_COM_TOKEN" \
     renovate/renovate
