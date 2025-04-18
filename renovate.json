@@ -1,0 +1,25 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+      "config:recommended"
+    ],
+    "customManagers": [
+      {
+        "customType": "regex",
+        "fileMatch": ["^Dockerfile$"],
+        "matchStrings": [
+          "#\\s*renovate:\\s*?(suite=(?<suite>.*?))?\\s*depName=(?<depName>.*?)?\\sENV .*?_VERSION=\"(?<currentValue>.*)\""
+        ],
+        "datasourceTemplate": "deb"
+      }
+    ],
+    "packageRules": [
+      {
+        "matchDatasources": ["deb"],
+        "matchPackageNames": ["tor"],
+        "registryUrls": [
+          "https://deb.debian.org/debian?suite=bookworm-backports&components=main,contrib,non-free&binaryArch=amd64"
+        ]
+      }
+    ]
+  }
