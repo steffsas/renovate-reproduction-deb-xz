@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 # add backports sources list to apt package manager
-RUN printf "deb http://deb.debian.org/debian stable-backports main\n" >> /etc/apt/sources.list.d/backports.list
+RUN printf "deb http://deb.debian.org/debian bookworm-backports main contrib non-free\n" >> /etc/apt/sources.list.d/backports.list
 
 # renovate: suite=bookworm-backports depName=tor
 ENV TOR_VERSION="0.4.8.14-1~bpo12+1"
